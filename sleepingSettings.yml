@@ -35,15 +35,15 @@ maxPlayers: 20
 #webPort: 8080
 
 # Stop the web-server when minecraft starts 
-#webStopOnStart: true
+webStopOnStart: true
 
 # You can specify an absolute path to serve instead or an url to redirect to.
 # true or false to enable, by default it will serve ./plugins/dynmap/web/
 # https://github.com/vincss/mcsleepingserverstarter/wiki/Use-internal-SSS-WebServer-for-dynmap
-#webServeDynmap: false
+webServeDynmap: false
 
 # Add a button in the web-ui to restart the minecraft server proxy
-#webAllowRestart: false
+webAllowRestart: false
 
 # Start the Minecraft Server
 startMinecraft: true
@@ -58,7 +58,7 @@ minecraftCommand: "java -jar paper.jar --nogui"
 #minecraftWorkingDirectory: ""
 
 # Automatically start the real server instead of the sleeping one
-#minecraftAutostart: false
+minecraftAutostart: true
 
 # Customise the delay between when the minecraft server stops 
 # and the sleeping server restarts (to ensure conection are closed)
@@ -71,15 +71,15 @@ restartDelay: 1000
 # Discord WebHook
 # https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks
 # Setup a Discord WebHook to your channel
-# discordWebhookUrl: "https://discord.com/api/webhooks/REPLACE_ME"
+discordWebhookUrl: "https://discord.com/api/webhooks/REPLACE_ME"
 # Avatar of the bot in the Discord WebHook
-# discordWebhookName: "SleepingServerStarter"
+discordWebhookName: "SleepingServerStarter"
 # Avatar of the bot in the Discord WebHook
-# discordWebhookAvatar: "https://raw.githubusercontent.com/vincss/mcsleepingserverstarter/master/docs/sleepingserver.png"
+discordWebhookAvatar: "https://raw.githubusercontent.com/vincss/mcsleepingserverstarter/master/docs/sleepingserver.png"
 
 # Only allow these player name on the white list to wake the server up
 # example ["vincss"]
-#whiteListedNames: [""]
+whiteListedNames: [""]
 
 # Use Minecraft `whitelist.json` instead of the `whiteListedNames` property.
 # Checks both username and UUID
