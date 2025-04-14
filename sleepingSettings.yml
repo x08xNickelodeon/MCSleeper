@@ -5,8 +5,7 @@
 # You can specify (https://motd.gg) by using the `§` prefix.
 serverName: "SleepingServer, waiting for his prince..."
 
-# The server name to display in Minecraft, defaults to serverName if not set
-# serverMOTD: "SleepingServer, waiting for his prince... [MOTD]"
+serverMOTD: "SleepingServer, waiting for his prince... [MOTD]"
 
 # Use Minecraft `server.properties` to overwrite 
 # `serverPort`, `maxPlayers`, `serverOnlineMode`, `useWhitelistFile`, 
@@ -23,7 +22,7 @@ serverPort: 25565
 loginMessage: "...Waking server up, come back in a minute..."
 
 # Like in the server.properties, to check the licence of player or not.
-serverOnlineMode: false
+serverOnlineMode: true
 
 # Use legacy "login" method
 # https://github.com/PrismarineJS/node-minecraft-protocol/issues/1279#issuecomment-1878866611
@@ -64,7 +63,7 @@ minecraftCommand: "java -jar paper.jar --nogui"
 # Customise the delay between when the minecraft server stops 
 # and the sleeping server restarts (to ensure conection are closed)
 # in milliseconds
-restartDelay: 5000
+restartDelay: 1000
 
 # Prevent the user to stop the server (trought web-server or cli).
 #preventStop: false
