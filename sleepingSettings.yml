@@ -5,7 +5,7 @@
 # You can specify (https://motd.gg) by using the `§` prefix.
 serverName: "SleepingServer, waiting for his prince..."
 
-serverMOTD: "SleepingServer, waiting for his prince... [MOTD]"
+#serverMOTD: "SleepingServer, waiting for his prince... [MOTD]"
 
 # Use Minecraft `server.properties` to overwrite 
 # `serverPort`, `maxPlayers`, `serverOnlineMode`, `useWhitelistFile`, 
@@ -35,15 +35,15 @@ maxPlayers: 20
 #webPort: 8080
 
 # Stop the web-server when minecraft starts 
-webStopOnStart: true
+#webStopOnStart: true
 
 # You can specify an absolute path to serve instead or an url to redirect to.
 # true or false to enable, by default it will serve ./plugins/dynmap/web/
 # https://github.com/vincss/mcsleepingserverstarter/wiki/Use-internal-SSS-WebServer-for-dynmap
-webServeDynmap: false
+#webServeDynmap: false
 
 # Add a button in the web-ui to restart the minecraft server proxy
-webAllowRestart: false
+#webAllowRestart: false
 
 # Start the Minecraft Server
 startMinecraft: true
@@ -58,7 +58,7 @@ minecraftCommand: "java -jar paper.jar --nogui"
 #minecraftWorkingDirectory: ""
 
 # Automatically start the real server instead of the sleeping one
-minecraftAutostart: true
+#minecraftAutostart: true
 
 # Customise the delay between when the minecraft server stops 
 # and the sleeping server restarts (to ensure conection are closed)
@@ -79,7 +79,7 @@ discordWebhookAvatar: "https://raw.githubusercontent.com/vincss/mcsleepingserver
 
 # Only allow these player name on the white list to wake the server up
 # example ["vincss"]
-whiteListedNames: [""]
+#whiteListedNames: [""]
 
 # Use Minecraft `whitelist.json` instead of the `whiteListedNames` property.
 # Checks both username and UUID
