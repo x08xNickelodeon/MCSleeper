@@ -23,6 +23,29 @@ import { SleepingWeb } from "./sleepingWeb";
 const isWindows = type().includes("Windows");
 
 export class SleepingContainer implements ISleepingServer {
+  installAutoShutdownPlugin = () => {
+    const pluginDirectory = path.join(getMinecraftDirectory(this.settings), 'plugins');
+    const pluginJarPath = path.join(pluginDirectory, 'AutoShutdown.jar');
+    
+    if (!fs.existsSync(pluginJarPath)) {
+      this.logger.info('[Container] Installing AutoShutdown plugin...');
+      
+      // GitHub API to get the latest release's .jar filename
+      const command = `
+        PLUGIN_JARFILE=\$(curl -s https://api.github.com/repos/x08xNickelodeon/AutoShutDown/releases/latest | jq -r '.assets[].name' | grep 'AutoShutdown-.*\\.jar')
+        curl -L -o ${pluginJarPath} https://github.com/x08xNickelodeon/AutoShutDown/releases/download/\$PLUGIN_JARFILE
+      `;
+      
+      try {
+        execSync(command, { stdio: 'inherit', shell: '/bin/bash' });
+        this.logger.info('[Container] AutoShutdown plugin installed successfully!');
+      } catch (error) {
+        this.logger.error('[Container] Failed to install AutoShutdown plugin:', error);
+      }
+    } else {
+      this.logger.info('[Container] AutoShutdown plugin already installed.');
+    }
+  };
   logger: LoggerType;
   settings: Settings;
   accessSettings: AccessFileSettings;
@@ -184,6 +207,7 @@ export class SleepingContainer implements ISleepingServer {
   };
 
   startMinecraft = () => {
+    this.installAutoShutdownPlugin();
     const onMcClosed = async () => {
       if (this.settings.discordWebhook && this.discord) {
         await this.discord.onServerStop();
