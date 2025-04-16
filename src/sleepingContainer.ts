@@ -27,25 +27,32 @@ const isWindows = type().includes("Windows");
 export class SleepingContainer implements ISleepingServer {
   installAutoShutdownPlugin = () => {
     const pluginDirectory = path.join(getMinecraftDirectory(this.settings), 'plugins');
-    const pluginJarPath = path.join(pluginDirectory, 'AutoShutdown.jar');
-    
-    if (!fs.existsSync(pluginJarPath)) {
-      this.logger.info('[Container] Installing AutoShutdown plugin...');
-      
-      // GitHub API to get the latest release's .jar filename
-      const command = `
-        PLUGIN_JARFILE=\$(curl -s https://api.github.com/repos/x08xNickelodeon/AutoShutDown/releases/latest | jq -r '.assets[].name' | grep 'AutoShutdown-.*\\.jar')
-        curl -L -o ${pluginJarPath} https://github.com/x08xNickelodeon/AutoShutDown/releases/download/\$PLUGIN_JARFILE
-      `;
-      
-      try {
-        execSync(command, { stdio: 'inherit', shell: '/bin/bash' });
-        this.logger.info('[Container] AutoShutdown plugin installed successfully!');
-      } catch (error) {
-        this.logger.error('[Container] Failed to install AutoShutdown plugin:', error);
-      }
-    } else {
-      this.logger.info('[Container] AutoShutdown plugin already installed.');
+  
+    try {
+      // Clean up old versions
+      const oldJars = fs.readdirSync(pluginDirectory).filter(f => f.startsWith('AutoShutdown') && f.endsWith('.jar'));
+      oldJars.forEach(jar => {
+        fs.unlinkSync(path.join(pluginDirectory, jar));
+      });
+  
+      // Fetch latest filename
+      const pluginFilename = execSync(
+        `curl -s https://api.github.com/repos/x08xNickelodeon/AutoShutDown/releases/latest | jq -r '.assets[].name' | grep "AutoShutdown-.*\\.jar"`,
+        { encoding: 'utf8' }
+      ).trim();
+  
+      const pluginPath = path.join(pluginDirectory, pluginFilename);
+  
+      this.logger.info(`[Container] Downloading AutoShutdown plugin: ${pluginFilename}`);
+  
+      execSync(
+        `curl -L -o "${pluginPath}" "https://github.com/x08xNickelodeon/AutoShutDown/releases/latest/download/${pluginFilename}"`,
+        { stdio: 'inherit', shell: '/bin/bash' }
+      );
+  
+      this.logger.info('[Container] AutoShutdown plugin installed successfully!');
+    } catch (err) {
+      this.logger.error('[Container] Failed to install AutoShutdown plugin:', err);
     }
   };
   logger: LoggerType;
