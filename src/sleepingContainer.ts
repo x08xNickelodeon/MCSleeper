@@ -1,5 +1,7 @@
 import { ChildProcess, execSync, spawn } from "child_process";
 import { type } from "os";
+import path = require("path");
+import fs = require("fs");
 import { SleepingBedrock } from "./sleepingBedrock";
 import { SleepingDiscord } from "./sleepingDiscord";
 import {
